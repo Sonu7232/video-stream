@@ -95,8 +95,6 @@ async def play_tg_file(c: Client, m: Message, replied: Message = None, link: str
             loser = await m.reply("📥 downloading video...")
         dl = await replied.download()
         link = replied.link
-        songname = "video"
-        duration = "00:00"
         Q = 720
         pq = m.text.split(None, 1)
         if ("t.me" not in m.text) and len(pq) > 1:
@@ -113,6 +111,7 @@ async def play_tg_file(c: Client, m: Message, replied: Message = None, link: str
                 duration = convert_seconds(replied.video.duration)
             elif replied.document:
                 songname = replied.document.file_name[:80]
+                duration = convert_seconds(replied.document.duration)
         except BaseException:
             songname = "Video"
 
